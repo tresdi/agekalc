@@ -220,6 +220,7 @@
   }
   .icon-mobile {
     position: absolute;
+    z-index: 1000;
     padding: calc(var(--spacing) * var(--icon-padding-mobile));
     top: calc( -0.5 * (calc(var(--spacing) * var(--icon-svg-size-mobile)) + calc(var(--spacing) * var(--icon-padding-mobile)) * 2) );
     right: calc( 50% - 0.5 * ( calc(var(--spacing) * var(--icon-svg-size-mobile)) + calc(var(--spacing) * var(--icon-padding-mobile)) * 2 ) );
@@ -290,6 +291,9 @@
   }
   .basis-\[33\.3\%\] {
     flex-basis: 33.3%;
+  }
+  .cursor-pointer {
+    cursor: pointer;
   }
   .items-start {
     align-items: flex-start;
@@ -385,23 +389,24 @@
     }
   }
   .invalid\:block {
-    &:is([data-invalid] > .error, [data-invalid] > input) {
+    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
       display: block;
     }
   }
   .invalid\:text-lightred {
-    &:is([data-invalid] > .error, [data-invalid] > input) {
+    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
       color: var(--color-lightred);
     }
   }
   .invalid\:outline-lightred {
-    &:is([data-invalid] > .error, [data-invalid] > input) {
+    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
       outline-color: var(--color-lightred);
     }
   }
   .md\:icon-desktop {
     @media (width >= 768px) {
       position: absolute;
+      z-index: 1000;
       padding: calc(var(--spacing) * var(--icon-padding-desktop));
       top: calc( -0.5 * (calc(var(--spacing) * var(--icon-svg-size-desktop)) + calc(var(--spacing) * var(--icon-padding-desktop)) * 2) );
       right: calc( 50% - 0.5 * ( calc(var(--spacing) * var(--icon-svg-size-desktop)) + calc(var(--spacing) * var(--icon-padding-desktop)) * 2 ) );

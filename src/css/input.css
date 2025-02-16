@@ -103,6 +103,7 @@
 
 @utility icon-* {
   position: absolute;
+  z-index: 1000;
   padding: --spacing(--value(--icon-padding- *));
   top: calc(
     -0.5 * (--spacing(--value(--icon-svg-size- *)) +
@@ -143,5 +144,5 @@
   }
 }
 
-@custom-variant invalid (&:is([data-invalid] > .error, [data-invalid] > input));
+@custom-variant invalid (&:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input));
 @custom-variant required (&:is([data-required] > .error, [data-required] > input));

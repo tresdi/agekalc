@@ -18,12 +18,9 @@
     <div
       class="container bg-white mx-auto overflow-hidden rounded-sm rounded-br-md md:rounded-br-xl xl:w-(--breakpoint-lg) px-6 py-10 lg:px-13"
     >
-      <form data-invalid>
+      <form id="myForm">
         <fieldset class="inline-flex w-full items-start gap-5 lg:gap-7">
-          <div
-            class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto"
-            data-invalid
-          >
+          <div class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto">
             <label
               for="dayInput"
               class="block uppercase text-smoke text-tiny tracking-[0.25em] font-bold py-2"
@@ -40,10 +37,7 @@
             <p class="error hidden invalid:block">Must be a valid day</p>
             <p class="error hidden required:block">This field is required</p>
           </div>
-          <div
-            class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto"
-            data-invalid
-          >
+          <div class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto">
             <label
               for="monthInput"
               class="block uppercase text-smoke text-tiny tracking-[0.25em] font-bold py-2"
@@ -60,10 +54,7 @@
             <p class="error hidden invalid:block">Must be a valid month</p>
             <p class="error hidden required:block">This field is required</p>
           </div>
-          <div
-            data-required
-            class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto"
-          >
+          <div class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto">
             <label
               for="yearInput"
               class="block uppercase text-smoke text-tiny tracking-[0.25em] font-bold py-2"
@@ -82,12 +73,14 @@
           </div>
         </fieldset>
         <p class="error hidden invalid:block">Must be a valid date</p>
+        <button type="submit" hidden></button>
       </form>
       <!-- Separator start -->
       <div class="relative w-full h-0.5 bg-lightgrey my-16 md:my-11">
         <button
           type="button"
-          class="bg-purple rounded-full icon-mobile md:icon-desktop md:right-0"
+          id="triggerButton"
+          class="bg-purple rounded-full cursor-pointer icon-mobile md:icon-desktop md:right-0"
         >
           <span class="sr-only">Compute</span>
           <svg
@@ -136,4 +129,5 @@
       <a href="#" class="text-lightred">Theo Rabema (Roméo Randrianasolo)</a>.
     </div>
   </body>
+  <script type="module" src="./src/js/index.js"></script>
 </html>
