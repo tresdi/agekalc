@@ -1,0 +1,147 @@
+@font-face {
+  font-family: Poppins400i;
+  src: url(../assets/fonts/Poppins-Italic.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Poppins700;
+  src: url(../assets/fonts/Poppins-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Poppins800i;
+  src: url(../assets/fonts/Poppins-ExtraBoldItalic.ttf);
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url('../assets/fonts/Poppins-Regular.ttf');
+  font-weight: 400;
+}
+
+@import 'tailwindcss';
+
+@theme {
+  /* Screen size breakpoints */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 960px;
+  --breakpoint-xl: 1280px;
+  /* --breakpoint-2xl: 1366px; */
+  /* --breakpoint-3xl: 1440px; */
+
+  /* Colors */
+  --color-*: initial;
+  --color-purple: hsl(259, 100%, 65%);
+  --color-lightred: hsl(0, 100%, 67%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-offwhite: hsl(0, 0%, 94%);
+  --color-lightgrey: hsl(0, 0%, 86%);
+  --color-smoke: hsl(0, 1%, 44%);
+  --color-offblack: hsl(0, 0%, 8%);
+
+  /* Typography */
+  --font-*: initial;
+  --font-poppins: 'Poppins';
+  --font-italic: 'Poppins400i';
+  --font-bold: 'Poppins700';
+  --font-extrabold: 'Poppins800i';
+  /* 32px */
+
+  --text-*: initial;
+  --text-tiny: 0.75rem;
+  --text-small: 1rem;
+  --text-big: 2rem;
+  --text-huge: 3rem;
+  --text-ultra: 5rem;
+
+  /* layout */
+  --mobile-x-padding: --spacing(6); /* 1.5rem = 24px */
+  --mobile-y-padding: --spacing(10); /* 2.5rem = 40px */
+  --desktop-x-padding: --spacing(13); /* 3.25rem = 52px */
+  --desktop-y-padding: --spacing(10); /* 40px */
+  --lg-max-width: 57.5rem; /* 840px */
+  --md-max-width: 47.5rem; /* 760px */
+  --sm-max-width: 100%;
+
+  --field-padding: 1rem;
+  /* form: mobile */
+  --field-width: auto;
+
+  /* form: not mobile */
+  --field-width: --spacing(36);
+  /* 160px */
+  --field-desktop-padding: 1.5rem; /* 24px */
+  --field-gap: 2rem; /* 32px */
+  --separator-y-margin: 3.5rem; /* 48px */
+
+  --radius-*: initial;
+  --radius-xl: 10rem; /* 160px */
+  --radius-md: 7rem; /* 112px */
+  --radius-sm: 1.25rem; /* 20px */
+  --radius-xs: 0.5rem; /* 8px */
+
+  /* icon on small screen: --spacing(2 * 5 + 6) size */
+  --icon-svg-size-mobile: 6; /* --spacing(6) = 24px */
+  --icon-padding-mobile: 5; /* 20 */
+
+  /* icon on large screen: --spacing(22) size */
+  --icon-svg-size-desktop: 10; /* 40px */
+  --icon-padding-desktop: 6; /* 24px */
+}
+
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-lightgrey);
+  }
+}
+
+@utility icon-* {
+  position: absolute;
+  padding: --spacing(--value(--icon-padding- *));
+  top: calc(
+    -0.5 * (--spacing(--value(--icon-svg-size- *)) +
+          --spacing(--value(--icon-padding)) * 2)
+  );
+  right: calc(
+    50% - 0.5 *
+      (
+        --spacing(--value(--icon-svg-size- *)) +
+          --spacing(--value(--icon-padding)) * 2
+      )
+  );
+
+  svg {
+    height: --spacing(--value(--icon-svg-size- *));
+    width: --spacing(--value(--icon-svg-size- *));
+  }
+}
+
+@layer components {
+  .field {
+    @apply block w-full font-bold text-small md:text-big leading-relaxed tracking-tight outline outline-lightgrey rounded-xs px-4 py-2 sm:py-4;
+    &::placeholder {
+      color: --alpha(var(--color-smoke) / 60%);
+    }
+  }
+
+  .error {
+    @apply mt-4 text-lightred text-tiny font-italic;
+  }
+
+  #result {
+    @apply font-extrabold text-huge lg:text-ultra leading-tight tracking-normal text-offblack;
+  }
+
+  output {
+    @apply text-purple;
+  }
+}
+
+@custom-variant invalid (&:is([data-invalid] > .error, [data-invalid] > input));
+@custom-variant required (&:is([data-required] > .error, [data-required] > input));

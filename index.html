@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/output.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./src/assets/images/favicon-32x32.png"
+    />
+    <title>Frontend Mentor | Age calculator app</title>
+  </head>
+  <body
+    class="lg:grid lg:h-screen lg:items-center lg:content-center pt-8 lg:pt-0"
+  >
+    <div
+      class="container bg-white mx-auto overflow-hidden rounded-sm rounded-br-md md:rounded-br-xl xl:w-(--breakpoint-lg) px-6 py-10 lg:px-13"
+    >
+      <form data-invalid>
+        <fieldset class="inline-flex w-full items-start gap-5 lg:gap-7">
+          <div
+            class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto"
+            data-invalid
+          >
+            <label
+              for="dayInput"
+              class="block uppercase text-smoke text-tiny tracking-[0.25em] font-bold py-2"
+              >Day</label
+            >
+            <input
+              type="number"
+              min="1"
+              max="31"
+              id="dayInput"
+              placeholder="DD"
+              class="field invalid:outline-lightred required:outline-lightred invalid:text-lightred"
+            />
+            <p class="error hidden invalid:block">Must be a valid day</p>
+            <p class="error hidden required:block">This field is required</p>
+          </div>
+          <div
+            class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto"
+            data-invalid
+          >
+            <label
+              for="monthInput"
+              class="block uppercase text-smoke text-tiny tracking-[0.25em] font-bold py-2"
+              >Month</label
+            >
+            <input
+              type="number"
+              min="1"
+              max="12"
+              id="monthInput"
+              placeholder="MM"
+              class="field invalid:outline-lightred required:outline-lightred invalid:text-lightred"
+            />
+            <p class="error hidden invalid:block">Must be a valid month</p>
+            <p class="error hidden required:block">This field is required</p>
+          </div>
+          <div
+            data-required
+            class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto"
+          >
+            <label
+              for="yearInput"
+              class="block uppercase text-smoke text-tiny tracking-[0.25em] font-bold py-2"
+              >Year</label
+            >
+            <input
+              type="number"
+              min="1970"
+              max="2024"
+              id="yearInput"
+              placeholder="YYYY"
+              class="field invalid:outline-lightred required:outline-lightred invalid:text-lightred"
+            />
+            <p class="error hidden invalid:block">Must be in the past</p>
+            <p class="error hidden required:block">This field is required</p>
+          </div>
+        </fieldset>
+        <p class="error hidden invalid:block">Must be a valid date</p>
+      </form>
+      <!-- Separator start -->
+      <div class="relative w-full h-0.5 bg-lightgrey my-16 md:my-11">
+        <button
+          type="button"
+          class="bg-purple rounded-full icon-mobile md:icon-desktop md:right-0"
+        >
+          <span class="sr-only">Compute</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="46"
+            height="44"
+            viewBox="0 0 46 44"
+            class="stroke-white fill-purple shrink-0"
+          >
+            <g stroke-width="4">
+              <path
+                d="M1 22.019C8.333 21.686 23 25.616 23 44M23 44V0M45 22.019C37.667 21.686 23 25.616 23 44"
+              />
+            </g>
+          </svg>
+        </button>
+      </div>
+      <!-- Separator end -->
+
+      <section id="result">
+        <div id="ageYears">
+          <output>38</output>
+          <span>years</span>
+        </div>
+        <div id="ageMonths">
+          <output>3</output>
+          <span>months</span>
+        </div>
+        <div id="ageDays">
+          <output>--</output>
+          <span>days</span>
+        </div>
+      </section>
+    </div>
+    <div
+      class="text-small text-center px-6 py-4 mx-6 font-poppins mt-8 rounded-sm"
+    >
+      Challenge by
+      <a
+        href="https://www.frontendmentor.io?ref=challenge"
+        target="_blank"
+        rel="noopener"
+        class="text-purple"
+        >Frontend Mentor</a
+      >. Coded by
+      <a href="#" class="text-lightred">Theo Rabema (Roméo Randrianasolo)</a>.
+    </div>
+  </body>
+</html>
