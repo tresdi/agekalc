@@ -1,4 +1,6 @@
 const DAYMS = 24 * 3600 * 1000
+const DEFAULT_DATE = new Date(0)
+const DEFAULT_DATE_JSON = dateToJson(DEFAULT_DATE)
 
 function isBst(year) {
   return new Date(year, 1, 30).getMonth() === 1
@@ -29,7 +31,7 @@ function dateToJson(date) {
 function jsonToDate(json) {
   for (let key in json) {
     if (json[key] === undefined || typeof json[key] !== 'number') {
-      json[key] = 1
+      json[key] = DEFAULT_DATE_JSON[key]
     }
   }
   const { year, month, day, hour, minute, second } = json
