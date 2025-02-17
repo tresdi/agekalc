@@ -89,4 +89,4 @@ function diff(origin, final) {
 }
 
 export default diff
-export { jsonToDate }
+export { jsonToDate, dateToJson }

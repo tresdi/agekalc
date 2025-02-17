@@ -145,4 +145,5 @@
 }
 
 @custom-variant invalid (&:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input));
+@custom-variant nonvalid (&:is([data-nonvalid] > .error, form[data-nonvalid] input));
 @custom-variant required (&:is([data-required] > .error, [data-required] > input));
