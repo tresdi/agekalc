@@ -1,6 +1,6 @@
 import diff, { jsonToDate } from './main.js'
 var dayInput, monthInput, yearInput, ageYears, ageDays, ageMonths
-var userInput, output, triggerButton
+var triggerButton
 
 function init() {
   dayInput = document.getElementById('dayInput')
@@ -32,24 +32,27 @@ function getInputs() {
 }
 
 function validate() {
-  userInput = getInputs()
+  return getInputs()
 }
 
 function getOutput() {
-  const birth = jsonToDate({ ...userInput, hour: 0, minute: 0, second: 0 })
-  output = diff(birth, new Date())
+  const birth = jsonToDate({ ...validate(), hour: 0, minute: 0, second: 0 })
+  return diff(birth, new Date())
 }
 
 //need some validation
 function renderOutput() {
-  const { years, months, days } = output
-  ageYears.querySelector('output').innerText = years
-  ageMonths.querySelector('output').innerText = months
-  ageDays.querySelector('output').innerText = days
+  const { years, months, days } = getOutput()
+  ageYears.querySelector('output').innerText = isNaN(years) ? '--' : years
+  ageMonths.querySelector('output').innerText = isNaN(months) ? '--' : months
+  ageDays.querySelector('output').innerText = isNaN(days) ? '--' : days
 
-  ageYears.querySelector('span').innerText = years > 1 ? 'years' : 'year'
-  ageMonths.querySelector('span').innerText = months > 1 ? 'months' : 'month'
-  ageDays.querySelector('span').innerText = days > 1 ? 'days' : 'day'
+  ageYears.querySelector('span').innerText =
+    years > 1 ? 'years' : isNaN(years) ? 'year(s)' : 'year'
+  ageMonths.querySelector('span').innerText =
+    months > 1 ? 'months' : isNaN(months) ? 'month(s)' : 'month'
+  ageDays.querySelector('span').innerText =
+    days > 1 ? 'days' : isNaN(days) ? 'day(s)' : 'day'
 }
 
 document.addEventListener('DOMContentLoaded', () => {
