@@ -32,7 +32,9 @@
               max="31"
               id="dayInput"
               placeholder="DD"
-              class="field invalid:outline-lightred required:outline-lightred invalid:text-lightred"
+              required
+              pattern=""
+              class="field invalid:outline-lightred required:outline-lightred nonvalid:outline-lightred invalid:text-lightred"
             />
             <p class="error hidden invalid:block">Must be a valid day</p>
             <p class="error hidden required:block">This field is required</p>
@@ -49,7 +51,8 @@
               max="12"
               id="monthInput"
               placeholder="MM"
-              class="field invalid:outline-lightred required:outline-lightred invalid:text-lightred"
+              required
+              class="field invalid:outline-lightred required:outline-lightred nonvalid:outline-lightred invalid:text-lightred"
             />
             <p class="error hidden invalid:block">Must be a valid month</p>
             <p class="error hidden required:block">This field is required</p>
@@ -66,13 +69,15 @@
               max="2024"
               id="yearInput"
               placeholder="YYYY"
-              class="field invalid:outline-lightred required:outline-lightred invalid:text-lightred"
+              required
+              class="field invalid:outline-lightred required:outline-lightred nonvalid:outline-lightred invalid:text-lightred"
             />
             <p class="error hidden invalid:block">Must be in the past</p>
             <p class="error hidden required:block">This field is required</p>
           </div>
         </fieldset>
         <p class="error hidden invalid:block">Must be a valid date</p>
+        <p class="error hidden nonvalid:block">Must be in the past</p>
         <button type="submit" hidden></button>
       </form>
       <!-- Separator start -->
