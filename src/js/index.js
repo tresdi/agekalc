@@ -113,7 +113,8 @@ function validate() {
   // check wrong date (incorrect) like 30/02/2000
   if (!isValidDate(userInputs)) {
     throw new NonCoherentDateError({ json: userInputs, form })
-  } else if (!isPastOrPresent(userInputs)) {
+  }
+  if (!isPastOrPresent(userInputs)) {
     throw new InvalidDateError({ json: userInputs, form })
   }
 
@@ -162,6 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
         removeValidationAttribute(input, 'data-invalid')
         removeValidationAttribute(input, 'data-required')
       })
+      form.removeAttribute('data-invalid')
+      form.removeAttribute('data-nonvalid')
       validate()
       console.log('hello')
       form.removeAttribute('data-invalid')
