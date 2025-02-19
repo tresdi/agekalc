@@ -113,8 +113,7 @@ function validate() {
   // check wrong date (incorrect) like 30/02/2000
   if (!isValidDate(userInputs)) {
     throw new NonCoherentDateError({ json: userInputs, form })
-  }
-  if (!isPastOrPresent(userInputs)) {
+  } else if (!isPastOrPresent(userInputs)) {
     throw new InvalidDateError({ json: userInputs, form })
   }
 
