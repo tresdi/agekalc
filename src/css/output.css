@@ -27,6 +27,8 @@
     --tracking-normal: 0em;
     --leading-tight: 1.25;
     --leading-relaxed: 1.625;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-font-feature-settings: var(--font-sans--font-feature-settings);
     --default-font-variation-settings: var(
@@ -207,9 +209,6 @@
   }
 }
 @layer utilities {
-  .collapse {
-    visibility: collapse;
-  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -231,9 +230,6 @@
       height: calc(var(--spacing) * var(--icon-svg-size-mobile));
       width: calc(var(--spacing) * var(--icon-svg-size-mobile));
     }
-  }
-  .absolute {
-    position: absolute;
   }
   .relative {
     position: relative;
@@ -274,23 +270,14 @@
   .contents {
     display: contents;
   }
-  .grid {
-    display: grid;
-  }
   .hidden {
     display: none;
   }
   .inline-flex {
     display: inline-flex;
   }
-  .list-item {
-    display: list-item;
-  }
   .table {
     display: table;
-  }
-  .h-0 {
-    height: calc(var(--spacing) * 0);
   }
   .h-0\.5 {
     height: calc(var(--spacing) * 0.5);
@@ -301,23 +288,14 @@
   .w-full {
     width: 100%;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink-0 {
     flex-shrink: 0;
   }
   .basis-\[33\.3\%\] {
     flex-basis: 33.3%;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .items-start {
     align-items: flex-start;
@@ -336,10 +314,6 @@
   }
   .rounded-br-md {
     border-bottom-right-radius: var(--radius-md);
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
   }
   .bg-lightgrey {
     background-color: var(--color-lightgrey);
@@ -402,21 +376,35 @@
   .uppercase {
     text-transform: uppercase;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
   }
+  .outline-transparent {
+    outline-color: transparent;
+  }
+  .filter {
+    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
+  }
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-400 {
+    --tw-duration: 400ms;
+    transition-duration: 400ms;
+  }
+  .group-hover\:fill-offblack {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        fill: var(--color-offblack);
+      }
+    }
+  }
   .required\:block {
     &:is([data-required] > .error, [data-required] > input) {
       display: block;
-    }
-  }
-  .required\:outline-lightred {
-    &:is([data-required] > .error, [data-required] > input) {
-      outline-color: var(--color-lightred);
     }
   }
   .invalid\:block {
@@ -424,14 +412,33 @@
       display: block;
     }
   }
-  .invalid\:text-lightred {
-    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
-      color: var(--color-lightred);
+  .hover\:bg-offblack {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-offblack);
+      }
     }
   }
-  .invalid\:outline-lightred {
-    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
-      outline-color: var(--color-lightred);
+  .focus\:outline-2 {
+    &:focus {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+  }
+  .focus\:outline-offblack\/40 {
+    &:focus {
+      outline-color: color-mix(in oklab, var(--color-offblack) 40%, transparent);
+    }
+  }
+  .focus-visible\:outline-4 {
+    &:focus-visible {
+      outline-style: var(--tw-outline-style);
+      outline-width: 4px;
+    }
+  }
+  .focus-visible\:outline-offblack\/30 {
+    &:focus-visible {
+      outline-color: color-mix(in oklab, var(--color-offblack) 30%, transparent);
     }
   }
   .md\:icon-desktop {
@@ -517,11 +524,6 @@
       display: block;
     }
   }
-  .nonvalid\:outline-lightred {
-    &:is([data-nonvalid] > .error, form[data-nonvalid] input) {
-      outline-color: var(--color-lightred);
-    }
-  }
 }
 @layer base {
   body {
@@ -551,6 +553,34 @@
     @media (width >= 768px) {
       font-size: var(--text-big);
     }
+    &:is([data-required] > .error, [data-required] > input) {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+    &:is([data-required] > .error, [data-required] > input) {
+      outline-color: color-mix(in oklab, var(--color-lightred) 40%, transparent);
+    }
+    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
+      outline-color: color-mix(in oklab, var(--color-lightred) 40%, transparent);
+    }
+    &:focus {
+      outline-style: var(--tw-outline-style);
+      outline-width: 4px;
+    }
+    &:focus {
+      outline-color: color-mix(in oklab, var(--color-lightgrey) 50%, transparent);
+    }
+    &:is([data-nonvalid] > .error, form[data-nonvalid] input) {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+    &:is([data-nonvalid] > .error, form[data-nonvalid] input) {
+      outline-color: color-mix(in oklab, var(--color-lightred) 40%, transparent);
+    }
     &::placeholder {
       color: color-mix(in oklab, var(--color-smoke) 60%, transparent);
     }
@@ -577,11 +607,6 @@
     color: var(--color-purple);
   }
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-tracking {
   syntax: "*";
   inherits: false;
@@ -590,6 +615,46 @@
   syntax: "*";
   inherits: false;
   initial-value: solid;
+}
+@property --tw-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: "*";
+  inherits: false;
 }
 @property --tw-leading {
   syntax: "*";

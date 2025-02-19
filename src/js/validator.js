@@ -98,7 +98,7 @@ function isValidDate2(json) {
   return year === _year && month === _month && day === _day
 }
 
-function isInvalidRequiredInput(inputElement) {
+function isRequiredInput(inputElement) {
   //   debugger
   if (inputElement?.required) {
     return inputElement?.value.trim() == false
@@ -130,6 +130,6 @@ export {
   isValidDateMonth2 as isValidDateMonth,
   isValidDate2 as isValidDate,
   isValidDateYear,
-  isInvalidRequiredInput,
+  isRequiredInput,
   isPastOrPresent,
 }

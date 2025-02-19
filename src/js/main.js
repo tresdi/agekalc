@@ -1,6 +1,9 @@
 const DAYMS = 24 * 3600 * 1000
-const DEFAULT_DATE = new Date(0)
+const DEFAULT_DATE = new Date(1960, 6, 26)
 const DEFAULT_DATE_JSON = dateToJson(DEFAULT_DATE)
+const JS_TEXT_ANIMATE_INTERVAL_MS = 30
+const JS_FIX_DURATION_TEXT_ANIMATE_DEFAULT_MS = 200
+const DEBOUNCE_DEFAULT_TIMEOUT_MS = 1000
 
 function isBst(year) {
   return new Date(year, 1, 30).getMonth() === 1
@@ -88,5 +91,116 @@ function diff(origin, final) {
   return { years: y, months: m, days: d }
 }
 
+function jsTextAnimateFixedInterval(
+  placeholder,
+  start,
+  end,
+  mutator = (val) => {},
+  intervalDurationMs = JS_TEXT_ANIMATE_INTERVAL_MS
+) {
+  // debugger
+  if (placeholder) {
+    placeholder.innerText = String.raw`${start}`
+    const interval = setInterval(() => {
+      if (start === end) {
+        clearInterval(interval)
+      }
+      start = mutator(start)
+      placeholder.innerText = String.raw`${start}`
+    }, intervalDurationMs)
+    return interval
+  }
+}
+
+function jsTextAnimateFixedDuration(
+  placeholder,
+  start,
+  end,
+  mutator = (val) => {},
+  durationMs = JS_FIX_DURATION_TEXT_ANIMATE_DEFAULT_MS
+) {
+  // debugger
+  if (placeholder) {
+    let possibleValues = []
+    for (let _start = start; _start !== end; _start = mutator(_start)) {
+      possibleValues.push(_start)
+    }
+    const intervalCount = possibleValues.length
+    const intervalDurationMs = Math.floor(durationMs / intervalCount)
+    // debugger
+    return jsTextAnimateFixedInterval(
+      placeholder,
+      start,
+      end,
+      mutator,
+      intervalDurationMs
+    )
+  }
+  return
+}
+
+function jsArrayBasedFixedIntervalTextAnimate(
+  placeholder,
+  array = [],
+  intervalDurationMs = JS_TEXT_ANIMATE_INTERVAL_MS
+) {
+  if (placeholder) {
+    const _array = array.slice()
+    const interval = setInterval(() => {
+      let next
+      if ((next = _array.shift()) !== undefined) {
+        placeholder.innerText = String.raw`${next}`
+      }
+    }, intervalDurationMs)
+    return interval
+  }
+}
+
+function jsArrayBasedFixedDurationTextAnimate(
+  placeholder,
+  array = [],
+  durationMs = JS_FIX_DURATION_TEXT_ANIMATE_DEFAULT_MS
+) {
+  if (placeholder) {
+    const intervalCount = array.length
+    const intervalDurationMs = Math.floor(durationMs / intervalCount)
+    // debugger
+    return jsArrayBasedFixedIntervalTextAnimate(
+      placeholder,
+      array,
+      intervalDurationMs
+    )
+  }
+}
+
+function arrayPick(array, pickLimit) {
+  if (array && array.length > 2 * pickLimit) {
+    // for very long range
+    let step = Math.floor(array.length / pickLimit)
+    const _array = array.slice(0, -1).filter((v, i) => i % step === 0)
+    _array.push(array.slice(-1)[0])
+    // debugger
+    return _array
+  }
+  return array.slice(-pickLimit)
+}
+
+function arrayFromRange(start, end, step = 1) {
+  const array = []
+  for (let i = start; i < end; i += step) {
+    array.push(i)
+  }
+  array.push(end)
+  return array
+}
+
 export default diff
-export { jsonToDate, dateToJson }
+export {
+  DEFAULT_DATE_JSON,
+  jsonToDate,
+  dateToJson,
+  jsArrayBasedFixedDurationTextAnimate as jsTextAnimate,
+  arrayPick,
+  arrayFromRange,
+  JS_FIX_DURATION_TEXT_ANIMATE_DEFAULT_MS,
+}

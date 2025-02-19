@@ -126,6 +126,7 @@
 @layer components {
   .field {
     @apply block w-full font-bold text-small md:text-big leading-relaxed tracking-tight outline outline-lightgrey rounded-xs px-4 py-2 sm:py-4;
+    @apply focus:outline-4 focus:outline-lightgrey/50 invalid:outline-2 invalid:outline-lightred/40 required:outline-2 required:outline-lightred/40 nonvalid:outline-2 nonvalid:outline-lightred/40;
     &::placeholder {
       color: --alpha(var(--color-smoke) / 60%);
     }
