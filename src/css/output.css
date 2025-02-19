@@ -21,12 +21,15 @@
 }
 @layer theme, base, components, utilities;
 @layer theme {
-  :root, :host {
+  :root,
+  :host {
     --spacing: 0.25rem;
     --tracking-tight: -0.025em;
     --tracking-normal: 0em;
     --leading-tight: 1.25;
     --leading-relaxed: 1.625;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-font-feature-settings: var(--font-sans--font-feature-settings);
     --default-font-variation-settings: var(
@@ -66,19 +69,33 @@
   }
 }
 @layer base {
-  *, ::after, ::before, ::backdrop, ::file-selector-button {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0 solid;
   }
-  html, :host {
+  html,
+  :host {
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: var( --default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" );
+    font-family: var(
+      --default-font-family,
+      ui-sans-serif,
+      system-ui,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      'Segoe UI Symbol',
+      'Noto Color Emoji'
+    );
     font-feature-settings: var(--default-font-feature-settings, normal);
-    font-variation-settings: var( --default-font-variation-settings, normal );
+    font-variation-settings: var(--default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
   }
   body {
@@ -93,7 +110,12 @@
     -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
   }
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-size: inherit;
     font-weight: inherit;
   }
@@ -102,19 +124,37 @@
     -webkit-text-decoration: inherit;
     text-decoration: inherit;
   }
-  b, strong {
+  b,
+  strong {
     font-weight: bolder;
   }
-  code, kbd, samp, pre {
-    font-family: var( --default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace );
-    font-feature-settings: var( --default-mono-font-feature-settings, normal );
-    font-variation-settings: var( --default-mono-font-variation-settings, normal );
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(
+      --default-mono-font-family,
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      'Liberation Mono',
+      'Courier New',
+      monospace
+    );
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(
+      --default-mono-font-variation-settings,
+      normal
+    );
     font-size: 1em;
   }
   small {
     font-size: 80%;
   }
-  sub, sup {
+  sub,
+  sup {
     font-size: 75%;
     line-height: 0;
     position: relative;
@@ -140,18 +180,33 @@
   summary {
     display: list-item;
   }
-  ol, ul, menu {
+  ol,
+  ul,
+  menu {
     list-style: none;
   }
-  img, svg, video, canvas, audio, iframe, embed, object {
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
     display: block;
     vertical-align: middle;
   }
-  img, video {
+  img,
+  video {
     max-width: 100%;
     height: auto;
   }
-  button, input, select, optgroup, textarea, ::file-selector-button {
+  button,
+  input,
+  select,
+  optgroup,
+  textarea,
+  ::file-selector-button {
     font: inherit;
     font-feature-settings: inherit;
     font-variation-settings: inherit;
@@ -190,26 +245,34 @@
   ::-webkit-datetime-edit-fields-wrapper {
     padding: 0;
   }
-  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+  ::-webkit-datetime-edit,
+  ::-webkit-datetime-edit-year-field,
+  ::-webkit-datetime-edit-month-field,
+  ::-webkit-datetime-edit-day-field,
+  ::-webkit-datetime-edit-hour-field,
+  ::-webkit-datetime-edit-minute-field,
+  ::-webkit-datetime-edit-second-field,
+  ::-webkit-datetime-edit-millisecond-field,
+  ::-webkit-datetime-edit-meridiem-field {
     padding-block: 0;
   }
   :-moz-ui-invalid {
     box-shadow: none;
   }
-  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+  button,
+  input:where([type='button'], [type='reset'], [type='submit']),
+  ::file-selector-button {
     appearance: button;
   }
-  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+  ::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
     height: auto;
   }
-  [hidden]:where(:not([hidden="until-found"])) {
+  [hidden]:where(:not([hidden='until-found'])) {
     display: none !important;
   }
 }
 @layer utilities {
-  .collapse {
-    visibility: collapse;
-  }
   .sr-only {
     position: absolute;
     width: 1px;
@@ -225,8 +288,17 @@
     position: absolute;
     z-index: 1000;
     padding: calc(var(--spacing) * var(--icon-padding-mobile));
-    top: calc( -0.5 * (calc(var(--spacing) * var(--icon-svg-size-mobile)) + calc(var(--spacing) * var(--icon-padding-mobile)) * 2) );
-    right: calc( 50% - 0.5 * ( calc(var(--spacing) * var(--icon-svg-size-mobile)) + calc(var(--spacing) * var(--icon-padding-mobile)) * 2 ) );
+    top: calc(
+      -0.5 * (calc(var(--spacing) * var(--icon-svg-size-mobile)) +
+            calc(var(--spacing) * var(--icon-padding-mobile)) * 2)
+    );
+    right: calc(
+      50% - 0.5 *
+        (
+          calc(var(--spacing) * var(--icon-svg-size-mobile)) +
+            calc(var(--spacing) * var(--icon-padding-mobile)) * 2
+        )
+    );
     svg {
       height: calc(var(--spacing) * var(--icon-svg-size-mobile));
       width: calc(var(--spacing) * var(--icon-svg-size-mobile));
@@ -277,23 +349,14 @@
   .contents {
     display: contents;
   }
-  .grid {
-    display: grid;
-  }
   .hidden {
     display: none;
   }
   .inline-flex {
     display: inline-flex;
   }
-  .list-item {
-    display: list-item;
-  }
   .table {
     display: table;
-  }
-  .h-0 {
-    height: calc(var(--spacing) * 0);
   }
   .h-0\.5 {
     height: calc(var(--spacing) * 0.5);
@@ -304,23 +367,14 @@
   .w-full {
     width: 100%;
   }
-  .flex-shrink {
-    flex-shrink: 1;
-  }
   .shrink-0 {
     flex-shrink: 0;
   }
   .basis-\[33\.3\%\] {
     flex-basis: 33.3%;
   }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .items-start {
     align-items: flex-start;
@@ -339,10 +393,6 @@
   }
   .rounded-br-md {
     border-bottom-right-radius: var(--radius-md);
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
   }
   .bg-lightgrey {
     background-color: var(--color-lightgrey);
@@ -405,36 +455,88 @@
   .uppercase {
     text-transform: uppercase;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
+  }
+  .outline-transparent {
+    outline-color: transparent;
+  }
+  .filter {
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast)
+      var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert)
+      var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
+  .transition-colors {
+    transition-property: color, background-color, border-color, outline-color,
+      text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via,
+      --tw-gradient-to;
+    transition-timing-function: var(
+      --tw-ease,
+      var(--default-transition-timing-function)
+    );
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .duration-400 {
+    --tw-duration: 400ms;
+    transition-duration: 400ms;
+  }
+  .group-hover\:fill-offblack {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        fill: var(--color-offblack);
+      }
+    }
   }
   .required\:block {
     &:is([data-required] > .error, [data-required] > input) {
       display: block;
     }
   }
-  .required\:outline-lightred {
-    &:is([data-required] > .error, [data-required] > input) {
-      outline-color: var(--color-lightred);
-    }
-  }
   .invalid\:block {
-    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
+    &:is(
+        [data-invalid] > .error,
+        [data-invalid] > input,
+        form[data-invalid] input
+      ) {
       display: block;
     }
   }
-  .invalid\:text-lightred {
-    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
-      color: var(--color-lightred);
+  .hover\:bg-offblack {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-offblack);
+      }
     }
   }
-  .invalid\:outline-lightred {
-    &:is([data-invalid] > .error, [data-invalid] > input, form[data-invalid] input) {
-      outline-color: var(--color-lightred);
+  .focus\:outline-2 {
+    &:focus {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+  }
+  .focus\:outline-offblack\/40 {
+    &:focus {
+      outline-color: color-mix(
+        in oklab,
+        var(--color-offblack) 40%,
+        transparent
+      );
+    }
+  }
+  .focus-visible\:outline-4 {
+    &:focus-visible {
+      outline-style: var(--tw-outline-style);
+      outline-width: 4px;
+    }
+  }
+  .focus-visible\:outline-offblack\/30 {
+    &:focus-visible {
+      outline-color: color-mix(
+        in oklab,
+        var(--color-offblack) 30%,
+        transparent
+      );
     }
   }
   .md\:icon-desktop {
@@ -442,8 +544,17 @@
       position: absolute;
       z-index: 1000;
       padding: calc(var(--spacing) * var(--icon-padding-desktop));
-      top: calc( -0.5 * (calc(var(--spacing) * var(--icon-svg-size-desktop)) + calc(var(--spacing) * var(--icon-padding-desktop)) * 2) );
-      right: calc( 50% - 0.5 * ( calc(var(--spacing) * var(--icon-svg-size-desktop)) + calc(var(--spacing) * var(--icon-padding-desktop)) * 2 ) );
+      top: calc(
+        -0.5 * (calc(var(--spacing) * var(--icon-svg-size-desktop)) +
+              calc(var(--spacing) * var(--icon-padding-desktop)) * 2)
+      );
+      right: calc(
+        50% - 0.5 *
+          (
+            calc(var(--spacing) * var(--icon-svg-size-desktop)) +
+              calc(var(--spacing) * var(--icon-padding-desktop)) * 2
+          )
+      );
       svg {
         height: calc(var(--spacing) * var(--icon-svg-size-desktop));
         width: calc(var(--spacing) * var(--icon-svg-size-desktop));
@@ -520,11 +631,6 @@
       display: block;
     }
   }
-  .nonvalid\:outline-lightred {
-    &:is([data-nonvalid] > .error, form[data-nonvalid] input) {
-      outline-color: var(--color-lightred);
-    }
-  }
 }
 @layer base {
   body {
@@ -554,6 +660,58 @@
     @media (width >= 768px) {
       font-size: var(--text-big);
     }
+    &:is([data-required] > .error, [data-required] > input) {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+    &:is([data-required] > .error, [data-required] > input) {
+      outline-color: color-mix(
+        in oklab,
+        var(--color-lightred) 40%,
+        transparent
+      );
+    }
+    &:is(
+        [data-invalid] > .error,
+        [data-invalid] > input,
+        form[data-invalid] input
+      ) {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+    &:is(
+        [data-invalid] > .error,
+        [data-invalid] > input,
+        form[data-invalid] input
+      ) {
+      outline-color: color-mix(
+        in oklab,
+        var(--color-lightred) 40%,
+        transparent
+      );
+    }
+    &:focus {
+      outline-style: var(--tw-outline-style);
+      outline-width: 4px;
+    }
+    &:focus {
+      outline-color: color-mix(
+        in oklab,
+        var(--color-lightgrey) 50%,
+        transparent
+      );
+    }
+    &:is([data-nonvalid] > .error, form[data-nonvalid] input) {
+      outline-style: var(--tw-outline-style);
+      outline-width: 2px;
+    }
+    &:is([data-nonvalid] > .error, form[data-nonvalid] input) {
+      outline-color: color-mix(
+        in oklab,
+        var(--color-lightred) 40%,
+        transparent
+      );
+    }
     &::placeholder {
       color: color-mix(in oklab, var(--color-smoke) 60%, transparent);
     }
@@ -580,21 +738,56 @@
     color: var(--color-purple);
   }
 }
-@property --tw-border-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
 @property --tw-tracking {
-  syntax: "*";
+  syntax: '*';
   inherits: false;
 }
 @property --tw-outline-style {
-  syntax: "*";
+  syntax: '*';
   inherits: false;
   initial-value: solid;
 }
+@property --tw-blur {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-brightness {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-contrast {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-grayscale {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-hue-rotate {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-invert {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-opacity {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-saturate {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-sepia {
+  syntax: '*';
+  inherits: false;
+}
+@property --tw-duration {
+  syntax: '*';
+  inherits: false;
+}
 @property --tw-leading {
-  syntax: "*";
+  syntax: '*';
   inherits: false;
 }
