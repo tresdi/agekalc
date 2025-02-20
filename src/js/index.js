@@ -1,6 +1,13 @@
-import diff, { jsonToDate } from './main.js'
+import diff, {
+  arrayFromRange,
+  arrayPick,
+  JS_FIX_DURATION_TEXT_ANIMATE_DEFAULT_MS as ANIM_MS,
+  jsonToDate,
+  jsTextAnimate,
+  DEFAULT_DATE_JSON,
+} from './main.js'
 import {
-  isInvalidRequiredInput,
+  isRequiredInput,
   isPastOrPresent,
   isValidDate,
   isValidDateDay,
@@ -17,8 +24,10 @@ import {
   InvalidDateError,
 } from './exceptions.js'
 
-var form, dayInput, monthInput, yearInput, ageYears, ageDays, ageMonths
-var triggerButton
+let form, dayInput, monthInput, yearInput, ageYears, ageDays, ageMonths
+let triggerButton
+const intervalIds = []
+let timeoutId = null
 
 function init() {
   dayInput = document.getElementById('dayInput')
@@ -36,6 +45,9 @@ function init() {
   Array(ageYears, ageMonths, ageDays).forEach((div) => {
     div.querySelector('output').innerText = '--'
   })
+  dayInput.min = DEFAULT_DATE_JSON.day
+  monthInput.min = DEFAULT_DATE_JSON.month
+  yearInput.min = DEFAULT_DATE_JSON.year
   yearInput.max = new Date().getFullYear()
 }
 
@@ -52,8 +64,7 @@ function getInputs() {
 }
 
 function requiredValidate(inputField) {
-  if (isInvalidRequiredInput(inputField))
-    throw new RequiredFieldError({ inputField })
+  if (isRequiredInput(inputField)) throw new RequiredFieldError({ inputField })
 }
 
 function validateField(inputId, ...validators) {
@@ -127,11 +138,32 @@ function getOutput() {
 }
 
 //need some validation
-function renderOutput() {
-  const { years, months, days } = getOutput()
-  ageYears.querySelector('output').innerText = isNaN(years) ? '--' : years
-  ageMonths.querySelector('output').innerText = isNaN(months) ? '--' : months
-  ageDays.querySelector('output').innerText = isNaN(days) ? '--' : days
+function renderOutput(years, months, days) {
+  const ageYearsOutput = ageYears.querySelector('output')
+  const ageMonthsOutput = ageMonths.querySelector('output')
+  const ageDaysOutput = ageDays.querySelector('output')
+
+  if (isNaN(years)) {
+    ageYearsOutput.innerText = '--'
+  } else {
+    // jsTextAnimate(ageYearsOutput, 0, years, (val) => val + 1)
+    let array = arrayPick(arrayFromRange(0, years), 100)
+    intervalIds.push(jsTextAnimate(ageYearsOutput, array, ANIM_MS))
+  }
+  if (isNaN(months)) {
+    ageMonthsOutput.innerText = '--'
+  } else {
+    // jsTextAnimate(ageMonthsOutput, 0, months, (val) => val + 1)
+    let array = arrayPick(arrayFromRange(0, months), 100)
+    intervalIds.push(jsTextAnimate(ageMonthsOutput, array, ANIM_MS))
+  }
+  if (isNaN(days)) {
+    ageDaysOutput.innerText = '--'
+  } else {
+    // jsTextAnimate(ageDaysOutput, 0, days, (val) => val + 1)
+    let array = arrayPick(arrayFromRange(0, days), 100)
+    intervalIds.push(jsTextAnimate(ageDaysOutput, array, ANIM_MS))
+  }
 
   ageYears.querySelector('span').innerText =
     years > 1 ? 'years' : isNaN(years) ? 'year(s)' : 'year'
@@ -173,8 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
         removeValidationAttribute(input, 'data-invalid')
         removeValidationAttribute(input, 'data-required')
       })
-      getOutput()
-      renderOutput()
+      const { years, months, days } = getOutput()
+      renderOutput(years, months, days)
     } catch (err) {
       switch (err.name) {
         case GroupedError.name:
@@ -210,8 +242,18 @@ document.addEventListener('DOMContentLoaded', () => {
           err?.form.setAttribute('data-nonvalid', '')
           break
         default:
-          alert('Unknown error')
+          throw err
       }
+    } finally {
+      if (timeoutId) {
+        clearTimeout(timeoutId)
+      }
+      timeoutId = setTimeout(() => {
+        intervalIds.slice().forEach((id) => {
+          clearInterval(id)
+          intervalIds.shift()
+        })
+      }, ANIM_MS * 2)
     }
   })
 })

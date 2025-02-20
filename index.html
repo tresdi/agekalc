@@ -18,7 +18,7 @@
     <div
       class="container bg-white mx-auto overflow-hidden rounded-sm rounded-br-md md:rounded-br-xl xl:w-(--breakpoint-lg) px-6 py-10 lg:px-13"
     >
-      <form id="myForm">
+      <form id="myForm" novalidate>
         <fieldset class="inline-flex w-full items-start gap-5 lg:gap-7">
           <div class="basis-[33.3%] md:shrink-0 md:basis-36 w-auto">
             <label
@@ -34,7 +34,9 @@
               placeholder="DD"
               required
               pattern=""
-              class="field invalid:outline-lightred required:outline-lightred nonvalid:outline-lightred"
+              autofocus
+              tabindex="1"
+              class="field"
             />
             <p class="error hidden invalid:block">Must be a valid day</p>
             <p class="error hidden required:block">This field is required</p>
@@ -52,7 +54,8 @@
               id="monthInput"
               placeholder="MM"
               required
-              class="field invalid:outline-lightred required:outline-lightred nonvalid:outline-lightred"
+              tabindex="2"
+              class="field"
             />
             <p class="error hidden invalid:block">Must be a valid month</p>
             <p class="error hidden required:block">This field is required</p>
@@ -70,7 +73,8 @@
               id="yearInput"
               placeholder="YYYY"
               required
-              class="field invalid:outline-lightred required:outline-lightred nonvalid:outline-lightred"
+              tabindex="3"
+              class="field"
             />
             <p class="error hidden invalid:block">Must be in the past</p>
             <p class="error hidden required:block">This field is required</p>
@@ -85,7 +89,8 @@
         <button
           type="button"
           id="triggerButton"
-          class="bg-purple rounded-full cursor-pointer icon-mobile md:icon-desktop md:right-0"
+          tabindex="4"
+          class="bg-purple group outline-transparent focus:outline-2 focus:outline-offblack/40 focus-visible:outline-4 focus-visible:outline-offblack/30 hover:bg-offblack transition-colors duration-400 rounded-full cursor-pointer icon-mobile md:icon-desktop md:right-0"
         >
           <span class="sr-only">Compute</span>
           <svg
@@ -93,7 +98,7 @@
             width="46"
             height="44"
             viewBox="0 0 46 44"
-            class="stroke-white fill-purple shrink-0"
+            class="stroke-white fill-purple group-hover:fill-offblack transition-colors duration-400 shrink-0"
           >
             <g stroke-width="4">
               <path
@@ -108,15 +113,15 @@
       <section id="result">
         <div id="ageYears">
           <output>38</output>
-          <span>years</span>
+          <span> years</span>
         </div>
         <div id="ageMonths">
           <output>3</output>
-          <span>months</span>
+          <span> months</span>
         </div>
         <div id="ageDays">
           <output>--</output>
-          <span>days</span>
+          <span> days</span>
         </div>
       </section>
     </div>
@@ -129,9 +134,12 @@
         target="_blank"
         rel="noopener"
         class="text-purple"
+        tabindex="-1"
         >Frontend Mentor</a
       >. Coded by
-      <a href="#" class="text-lightred">Theo Rabema (Roméo Randrianasolo)</a>.
+      <a href="#" class="text-lightred" tabindex="-1"
+        >Theo Rabema (Roméo Randrianasolo)</a
+      >.
     </div>
   </body>
   <script type="module" src="./src/js/index.js"></script>
