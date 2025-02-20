@@ -1,102 +1,181 @@
-# Frontend Mentor - Age calculator app
+# Frontend Mentor - Age calculator app solution
 
-![Design preview for the Age calculator app coding challenge](./design/desktop-preview.jpg)
+This is a solution to the [Age calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/age-calculator-app-dF9DFFpj-Q). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Frontend Mentor - Age calculator app solution](#frontend-mentor---age-calculator-app-solution)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshots](#screenshots)
+      - [Desktop view (1024px width and plus)](#desktop-view-1024px-width-and-plus)
+      - [Tablet view](#tablet-view)
+      - [Mobile view](#mobile-view)
+    - [Links](#links)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+    - [What I learned](#what-i-learned)
+    - [Continued development](#continued-development)
+    - [Useful resources](#useful-resources)
+    - [VSCode Extensions](#vscode-extensions)
+  - [Author](#author)
+  - [Acknowledgments](#acknowledgments)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+**Note: Delete this note and update the table of contents based on what sections you keep.**
 
-**To do this challenge, you need a decent understanding of HTML, CSS and JavaScript.**
+## Overview
 
-## The challenge
+### The challenge
 
-Your challenge is to build out this age calculator app and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to: 
+Users should be able to:
 
 - View an age in years, months, and days after submitting a valid date through the form
 - Receive validation errors if:
   - Any field is empty when the form is submitted
-  - The day number is not between 1-31
-  - The month number is not between 1-12
-  - The date is in the future
-  - The date is invalid e.g. 31/04/1991 (there are 30 days in April)
-- View the optimal layout for the interface depending on their device's screen size
+  - The day number is not between **1-31**
+  - The month number is not between **1-12**
+  - The year or the resulting date is in the future (not necessarily the year)
+  - An input value starts with 0 (**e.g. 06/02/2000**)
+  - The date is invalid e.g. **31/04/1991** (there are 30 days in April)
+- View the optimal layout for the interface depending on their device's screen size (smartphone, tablet, desktop)
 - See hover and focus states for all interactive elements on the page
 - **Bonus**: See the age numbers animate to their final number when the form is submitted
 
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+### Screenshots
+#### Desktop view (1024px width and plus)
+![](./screenshot/desktop.png)
 
-## Where to find everything
+#### Tablet view
+![](./screenshot/tablet.png)
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design. 
+#### Mobile view
+![](./screenshot/mobile.png)
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`. 
+### Links
 
-If you would like the design files (we provide Sketch & Figma versions) to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
 
-All the required assets for this project are in the `/assets` folder. The images are already exported for the correct screen size and optimized.
+## My process
+* Set up the environment to use npm as package manager, install the dependencies, add npm `start` *script*, editing the .gitignore and finally creating the local git repo
+  ```bash
+  npm init
+  npm install tailwindcss @tailwindcss/cli -D
+  git init
+  ```
+  ```json
+  ...
+  "start": "npx @tailwindcss/cli -i ./src/css/input.css -o ./src/css/output.css -w",
+  ...
+  ```
+* Run VSCode Live Server (or any alternative), or open the index.html in the browser
+* Start a new git `feat` branch, in order to progressively merge working code to the main branch and implement new ideas inside the *feat* branch
 
-We also include variable and static font files for the required fonts for this project. You can choose to either link to Google Fonts or use the local font files to host the fonts yourself. Note that we've removed the static font files for the font weights that aren't needed for this project.
+* Start by gathering all the visual properties from the guide and convert them into variables
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+* Customize tailwind defaults under the `@theme` stack:
+  ```css
+  /* Doing the reset */
+  --breakpoint-*: initial;
+  /* Then customize */
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  ...
+  /* For the font-size */
+  --text-*: initial;
+  --text-tiny: 0.75rem;
+  ...
+  /* For colors */
+  --color-*: initial;
+  --color-smoke: hsl(0, 1%, 44%);
+  ...
+  /* For font family */
+  --font-*: initial;
+  --font-poppins: 'Poppins';
+  ...
+  ...
+  ```
 
-## Building your project
+* Set the default whether on the element or under the CSS `base` *layer*
+  ```css
+  @layer base {
+    ...
+  }
+  ```
+  for example with the body font-size and background-color (personal choice).
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+* Start building the HTML by progressively adding the tailwind classes, with &laquo; *mobile first* &raquo; kept in mind, as well as **parent first**
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+* Customize *verbose* classlist and single use element (like those with `id`) in the CSS file under the `components` *layer*
+  ```css
+  @layer components {
+    .field { ... }
+    .error { ... }
+    #result { ... }
+  }
 
-## Deploying your project
+* Add custom variants for each input invalid states:
+  - `invalid` for any type of incorrectness (*value range*, *incorrect type*)
+  - `nonvalid`, similar to *invalid* but is specific to the &laquo; **future date** &raquo; error
+  - `required` for mistakenly forget to fill `:required` input; and for any *particularly invalid input type* as of the default validation (behavior) of the input[type=number] element<br/>
+    <u>**Examples:**</u>
+    *not number value*, *number starting with trailing zero (<code>0</code>)*
 
-As mentioned above, there are many ways to host your project for free. Our recommended hosts are:
+### Built with
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+- Generic elements (except ***section***)
+- Tailwindcss version 4
+- Tailwind variables, utility classes and custom variants
+- Mobile-first workflow
+- ESM module system
+- Vanilla JS based animations
+- Vanilla JS based form validations, more precisely ***exception*** based
+  
+### What I learned
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+1. Mobile first workflow
+2. Use of @tailwindcss/cli along with `npm start`
+3. Customize Tailwind variables, utilities and variants
+4. Keeping working codes, implements **new ideas <small>&gt;</small> new codes** instead of replacing (this is why there are many unused functions)
+5. Prefer `pure functions` in Javascript
+6. Create custom *Error* class extensions
 
-## Create a custom `README.md`
+### Continued development
+I think that using JS for animations would be more efficient with `asynchroneous programming`, so when it comes to JS based animations or long-running code, I will focus on using the ***async-await*** or ***Promise*** in my code
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+Anyway, I don't know if I must've used those with the *setInterval/clearInterval* and *setTimeout/clearTimeout* within my code, though it might be interesting
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+### Useful resources
+* [The TailwindCSS Online Docs](tailwindcss.com/docs)
+* [Same docs for offline use](github.com/tailwindlabs/tailwindcss.com)
+* [Mozilla Developer Network](https://developer.mozilla.org)
+* [W3Schools Online Tutorial](https://w3schools.com)
+* [Visualized Git Course for Beginner & Professional Developers in 2024](https://www.youtube.com/watch?v=S7XpTAnSDL4&ab_channel=JavaScriptMastery) [Youtube]
+* [Intro to Git Fundamentals](https://www.epicweb.dev/tutorials/git-fundamentals/commands/intro-to-git-fundamentals)
 
-## Submitting your solution
+### VSCode Extensions
+* [Ritwick Dey's Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+  
+  **Installation**
+  
+  Open VSCode and type ctrl+P, type ext install ritwickdey.liveserver
+* [TailwindLabs Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+  
+  **Installation**
+  
+  Open VSCode and type ctrl+P, type ext install bradlc.vscode-tailwindcss
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+## Author
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+- LinkedIn - [Romeo RANDRIANASOLO](https://linkedin.com/in/romeorandria)
+- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Twitter - [@yourusername](https://www.twitter.com/yourusername)
 
-## Sharing your solution
+## Acknowledgments
 
-There are multiple places you can share your solution:
-
-1. Share your solution page in the **#finished-projects** channel of the [community](https://www.frontendmentor.io/community). 
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
-
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback. 
-
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
-
-## Got feedback for us?
-
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
-
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+* To me!
+* To the genius who created Starlink, who made Internet cheaper in Africa
+* To the genius at Tailwind, especially for making their docs available for offline use
+* To MDN creator, although their offline docs still doesn't work for me
