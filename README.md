@@ -54,8 +54,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [https://www.frontendmentor.io/solutions/responsive-design-solution-using-tailwindcss-utility-classes-k-g2a3cup7](https://www.frontendmentor.io/solutions/responsive-design-solution-using-tailwindcss-utility-classes-k-g2a3cup7)
+- Live Site URL: [https://tresdi.github.io/agekalc](https://tresdi.github.io/agekalc)
 
 ## My process
 * Set up the environment to use npm as package manager, install the dependencies, add npm `start` *script*, editing the .gitignore and finally creating the local git repo
@@ -170,8 +170,7 @@ Anyway, I don't know if I must've used those with the *setInterval/clearInterval
 ## Author
 
 - LinkedIn - [Romeo RANDRIANASOLO](https://linkedin.com/in/romeorandria)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Frontend Mentor - [@tresdi](https://www.frontendmentor.io/profile/tresdi)
 
 ## Acknowledgments
 
